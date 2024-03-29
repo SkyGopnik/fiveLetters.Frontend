@@ -1,6 +1,7 @@
 const generatePathGroup = (name) => {
   return [
     `/^${name}/`,
+    `/.\\_${name}/`,
     `/.\\/${name}/`
   ];
 };
@@ -69,6 +70,7 @@ module.exports = {
           ...generatePathGroup("hooks"),
           ...generatePathGroup("functions"),
           ...generatePathGroup("utils"),
+          ...generatePathGroup("assets"),
           ...generatePathGroup("types"),
           "parent",
           "sibling",

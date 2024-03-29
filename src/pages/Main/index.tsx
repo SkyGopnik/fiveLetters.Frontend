@@ -1,13 +1,14 @@
-import classNames from "classnames";
+import { Background } from "components/Background";
 
-import { useAsyncEffect } from "hooks/useAsyncEffect";
+import LogoIcon from "./_assets/logo.svg";
 
 import style from "./index.module.scss";
 
 export default function MainPage() {
-  useAsyncEffect(async () => {},  []);
-
   return (
-    <div className={classNames(style.test)}>123</div>
+    <Background>
+      <LogoIcon className={style.logo} />
+      <button className={style.button}>Начать игру</button>
+    </Background>
   );
 }
