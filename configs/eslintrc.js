@@ -59,18 +59,37 @@ module.exports = {
     "linebreak-style": ["error", "unix"],
     eqeqeq: ["error", "always"],
     "react-hooks/exhaustive-deps": "off",
-    "no-multiple-empty-lines": ["error", { max: 1, maxBOF: 0, maxEOF: 0 }],
+    "no-multiple-empty-lines": [
+      "error",
+      {
+        max: 1,
+        maxBOF: 0,
+        maxEOF: 0
+      }
+    ],
+    "max-len": ["error", { "code": 80, "tabWidth": 2 }],
+    "react/jsx-max-props-per-line": [
+      "error",
+      {
+        "maximum": {
+          single: 3,
+          multi: 1
+        }
+      }
+    ],
     "import-helpers/order-imports": [
       "warn",
       {
         newlinesBetween: "always",
         groups: [
           "module",
+          ...generatePathGroup("pages"),
           ...generatePathGroup("components"),
           ...generatePathGroup("hooks"),
           ...generatePathGroup("functions"),
           ...generatePathGroup("utils"),
           ...generatePathGroup("assets"),
+          ...generatePathGroup("constants"),
           ...generatePathGroup("types"),
           "parent",
           "sibling",

@@ -6,11 +6,14 @@ import { createMemoryRouter,
   RouterProvider
 } from "react-router-dom";
 
-import MainPage from "./pages/Main";
+import MainPage from "pages/Main";
+import OnboardPage from "pages/Onboard";
+
 import "./style/index.scss";
 
 if (document.location.href) {
-  axios.defaults.headers.common["Authorization"] = `VK ${document.location.href.replace("file", "https")}`;
+  axios.defaults.headers.common["Authorization"] =
+    `VK ${document.location.href.replace("file", "https")}`;
 }
 
 axios.defaults.baseURL = "https://googler-api.skyreglis.com/";
@@ -20,9 +23,13 @@ const router = createMemoryRouter([
   {
     path: "/",
     element: <MainPage />
+  },
+  {
+    path: "/onboard",
+    element: <OnboardPage />
   }
 ], {
-  initialEntries: ["/"]
+  initialEntries: ["/onboard"]
 });
 
 bridge.send("VKWebAppInit")

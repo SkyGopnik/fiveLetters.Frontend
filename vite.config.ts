@@ -8,8 +8,10 @@ import svgr from "vite-plugin-svgr";
 const absolutePathAliases: { [key: string]: string } = {};
 
 const srcPath = path.resolve("./src/");
-// Ajust the regex here to include .vue, .js, .jsx, etc.. files from the resources/ folder
-const srcRootContent = readdirSync(srcPath, { withFileTypes: true }).map((dirent) => dirent.name.replace(/(\.ts){1}(x?)/, ""));
+const srcRootContent = readdirSync(
+  srcPath,
+  { withFileTypes: true }
+).map((dirent) => dirent.name.replace(/(\.ts){1}(x?)/, ""));
 
 srcRootContent.forEach((directory) => {
   absolutePathAliases[directory] = path.join(srcPath, directory);

@@ -1,0 +1,13 @@
+.stepper {
+  margin-top: auto;
+  padding: 30px 20px;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 110px;
+
+  .image {
+    max-width: 100%;
+  }
+}

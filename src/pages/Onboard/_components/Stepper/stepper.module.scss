@@ -1,0 +1,25 @@
+.stepper {
+  padding: 20px;
+
+  border-radius: 30px;
+
+  background: #ffffff;
+
+  .title {
+    color: #000;
+  }
+
+  .description {
+    margin-top: 10px;
+
+    color: #a3a3a3;
+  }
+
+  .actions {
+    margin-top: 40px;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+}
