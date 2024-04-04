@@ -1,0 +1,80 @@
+@use "style/mixins/font";
+@use "style/mixins/actions";
+
+.buttonColor {
+  &_white {
+    color: #000;
+    background: #fff;
+  }
+
+  &_black {
+    color: #000;
+    background: #262626;
+  }
+
+  &_amber {
+    color: #fff;
+    background: #d97706;
+  }
+
+  &_red {
+    color: #fff;
+    background: #dc2626;
+  }
+
+  &_green {
+    color: #fff;
+    background: #65a30d;
+  }
+
+  &_cyan {
+    color: #fff;
+    background: #0891b2;
+  }
+
+  &_blue {
+    color: #fff;
+    background: #1d4ed8;
+  }
+
+  &_violet {
+    color: #fff;
+    background: #7c3aed;
+  }
+
+  &_gray {
+    color: #fff;
+    background: #525252;
+  }
+}
+
+.button {
+  width: 100%;
+  height: 60px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  outline: none;
+
+  border: none;
+  border-radius: 25px;
+
+  @include font.type("h3");
+
+  transition: opacity .3s ease;
+
+  @include actions.hover {
+    opacity: .8;
+  }
+
+  &:disabled {
+    pointer-events: none;
+
+    color: #404040;
+    background: #262626;
+  }
+}

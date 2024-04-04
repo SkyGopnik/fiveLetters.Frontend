@@ -1,5 +1,7 @@
 import { Background } from "components/Background";
 
+import { Button } from "../../components/Button";
+
 import LogoIcon from "./_assets/logo.svg";
 
 import style from "./index.module.scss";
@@ -8,7 +10,7 @@ export default function MainPage() {
   return (
     <Background>
       <LogoIcon className={style.logo} />
-      <button className={style.button}>Начать игру</button>
+      <Button className={style.button}>Начать игру</Button>
     </Background>
   );
 }

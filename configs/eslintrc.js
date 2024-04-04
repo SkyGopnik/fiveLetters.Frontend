@@ -78,6 +78,7 @@ module.exports = {
         ],
         alphabetize: { order: "asc", ignoreCase: true }
       }
-    ]
+    ],
+    "eol-last": "error"
   }
 };

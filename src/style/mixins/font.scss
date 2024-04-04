@@ -1,0 +1,74 @@
+.h1 {
+  font-family: Geologica, sans-serif;
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 119%;
+}
+
+.h2 {
+  font-family: Geologica, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 130%;
+}
+
+.h3 {
+  font-family: Geologica, sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 122%;
+}
+
+.h4 {
+  font-family: Geologica, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 137%;
+}
+
+.h5 {
+  font-family: Geologica, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 143%;
+}
+
+.b1 {
+  font-family: Geologica, sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 115%;
+}
+
+.b2 {
+  font-family: Geologica, sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 117%;
+}
+
+.b3 {
+  font-family: Geologica, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 130%;
+}
+
+.b4 {
+  font-family: Geologica, sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 122%;
+}
+
+.b5 {
+  font-family: Geologica, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 125%;
+}
+
+/* stylelint-disable scss/at-extend-no-missing-placeholder */
+@mixin type($name) {
+  @extend .#{$name};
+}
