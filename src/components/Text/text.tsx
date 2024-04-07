@@ -6,12 +6,10 @@ import { TextProps } from "./types";
 
 export const Text: FunctionComponent<TextProps> = (
   { className, type, tag = "p", ...props }
-) => {
-  return createElement(
-    tag as unknown as FunctionComponent<DivProps>,
-    {
-      ...props,
-      className: classNames(type, className)
-    }
-  );
-};
+) => createElement(
+  tag as unknown as FunctionComponent<DivProps>,
+  {
+    ...props,
+    className: classNames(type, className)
+  }
+);

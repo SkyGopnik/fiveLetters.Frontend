@@ -19,7 +19,7 @@ axios.defaults.baseURL = "https://googler-api.skyreglis.com/";
 axios.defaults.responseType = "json";
 
 const router = createMemoryRouter(ROUTES, {
-  initialEntries: ["/onboard"]
+  initialEntries: ["/main"]
 });
 
 bridge.send("VKWebAppInit")
