@@ -83,14 +83,17 @@ module.exports = {
         newlinesBetween: "always",
         groups: [
           "module",
-          ...generatePathGroup("pages"),
-          ...generatePathGroup("components"),
-          ...generatePathGroup("hooks"),
-          ...generatePathGroup("functions"),
-          ...generatePathGroup("utils"),
-          ...generatePathGroup("assets"),
-          ...generatePathGroup("constants"),
-          ...generatePathGroup("types"),
+          ...[
+            "layouts",
+            "pages",
+            "components",
+            "hooks",
+            "functions",
+            "utils",
+            "assets",
+            "constants",
+            "types"
+          ].map((name) => generatePathGroup(name)),
           "parent",
           "sibling",
           "index"

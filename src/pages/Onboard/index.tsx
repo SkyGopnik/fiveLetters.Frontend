@@ -1,7 +1,5 @@
 import { useMemo, useState } from "react";
 
-import { Background } from "components/Background";
-
 import { Stepper } from "./_components/Stepper";
 
 import { STEPS } from "./constants";
@@ -31,7 +29,7 @@ export default function OnboardPage() {
   };
 
   return (
-    <Background>
+    <>
       <div className={style.stepper}>
         <Image className={style.image} />
         <Stepper
@@ -42,6 +40,6 @@ export default function OnboardPage() {
           nextStep={handleNextStep}
         />
       </div>
-    </Background>
+    </>
   );
 }

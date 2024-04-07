@@ -6,8 +6,7 @@ import { createMemoryRouter,
   RouterProvider
 } from "react-router-dom";
 
-import MainPage from "pages/Main";
-import OnboardPage from "pages/Onboard";
+import { ROUTES } from "./constants";
 
 import "./style/index.scss";
 
@@ -19,16 +18,7 @@ if (document.location.href) {
 axios.defaults.baseURL = "https://googler-api.skyreglis.com/";
 axios.defaults.responseType = "json";
 
-const router = createMemoryRouter([
-  {
-    path: "/",
-    element: <MainPage />
-  },
-  {
-    path: "/onboard",
-    element: <OnboardPage />
-  }
-], {
+const router = createMemoryRouter(ROUTES, {
   initialEntries: ["/onboard"]
 });
 
