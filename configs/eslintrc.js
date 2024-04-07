@@ -93,7 +93,12 @@ module.exports = {
             "assets",
             "constants",
             "types"
-          ].map((name) => generatePathGroup(name)),
+          ].reduce(
+            (acc, name) => acc.concat(
+              generatePathGroup(name)
+            ),
+            []
+          ),
           "parent",
           "sibling",
           "index"
