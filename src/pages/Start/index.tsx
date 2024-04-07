@@ -1,12 +1,11 @@
 import { Background } from "components/Background";
-
-import { Button } from "../../components/Button";
+import { Button } from "components/Button";
 
 import LogoIcon from "./_assets/logo.svg";
 
 import style from "./index.module.scss";
 
-export default function MainPage() {
+export default function StartPage() {
   return (
     <Background>
       <LogoIcon className={style.logo} />
