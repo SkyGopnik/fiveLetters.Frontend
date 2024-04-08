@@ -21,7 +21,7 @@ export const Stats: FunctionComponent<Props> = ({ score, record }) => (
       </Text>
     </div>
     <div className={style.item}>
-      <Text type="h2" tag="h2">Твой счет</Text>
+      <Text type="h2" tag="h2">Твой рекорд</Text>
       <Text className={style.description} type="b1">
         <span>{record}</span>
         <StarIcon />

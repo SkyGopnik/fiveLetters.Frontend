@@ -4,6 +4,7 @@ import { DefaultLayout } from "layouts/Default";
 
 import MainPage from "pages/Main";
 import OnboardPage from "pages/Onboard";
+import RulesPage from "pages/Rules";
 import StartPage from "pages/Start";
 
 export const ROUTES: Array<RouteObject> = [
@@ -21,6 +22,10 @@ export const ROUTES: Array<RouteObject> = [
       {
         path: "/main",
         element: <MainPage />
+      },
+      {
+        path: "/rules",
+        element: <RulesPage />
       }
     ]
   }

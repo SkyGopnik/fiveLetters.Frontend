@@ -1,0 +1,15 @@
+.close {
+  padding: 0 10px;
+
+  display: flex;
+
+  .icon {
+    cursor: pointer;
+
+    transition: opacity .3s ease;
+
+    &:hover {
+      opacity: .7;
+    }
+  }
+}

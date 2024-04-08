@@ -1,0 +1,50 @@
+@use "style/mixins/font";
+
+.rules {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+
+  color: #ffffff;
+
+  &:nth-child(1) {
+    .letter {
+      color: #06b6d4;
+      background: #ffffff;
+    }
+  }
+
+  &:nth-child(2) {
+    .letter {
+      color: #ffffff;
+      background: #0e7490;
+    }
+  }
+
+  &:nth-child(3) {
+    .letter {
+      color: #0e7490;
+      background: #0891b2;
+    }
+  }
+
+  .letter {
+    width: 80px;
+    height: 80px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @include font.type("h1");
+
+    border-radius: 20px;
+  }
+}

@@ -1,0 +1,28 @@
+.page {
+  height: 100%;
+
+  padding: 30px 20px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  margin-top: 96px;
+
+  text-align: center;
+
+  color: #ffffff;
+}
+
+.rules {
+  margin-top: 40px;
+}
+
+.actions {
+  margin-top: auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
