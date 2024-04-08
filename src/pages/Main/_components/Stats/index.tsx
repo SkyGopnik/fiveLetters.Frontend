@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 
 import { Text } from "components/Text";
 
-import StarIcon from "./_assets/star.svg";
+import StarIcon from "assets/star.svg";
 
 import style from "./index.module.scss";
 

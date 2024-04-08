@@ -26,7 +26,8 @@ module.exports = {
     "react-hooks",
     "import-helpers",
     "@typescript-eslint",
-    "unused-imports"
+    "unused-imports",
+    "@stylistic/eslint-plugin"
   ],
   rules: {
     "unused-imports/no-unused-imports": "error",
@@ -106,6 +107,20 @@ module.exports = {
         alphabetize: { order: "asc", ignoreCase: true }
       }
     ],
-    "eol-last": "error"
+    "eol-last": "error",
+    "@typescript-eslint/member-delimiter-style": [
+      "error",
+      {
+        "multiline": {
+          "delimiter": "comma",
+          "requireLast": false
+        },
+        "singleline": {
+          "delimiter": "comma",
+          "requireLast": false
+        },
+        "multilineDetection": "brackets"
+      }
+    ]
   }
 };

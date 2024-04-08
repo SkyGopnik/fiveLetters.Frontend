@@ -2,6 +2,7 @@ import { RouteObject } from "react-router";
 
 import { DefaultLayout } from "layouts/Default";
 
+import GamePage from "pages/Game";
 import MainPage from "pages/Main";
 import OnboardPage from "pages/Onboard";
 import RulesPage from "pages/Rules";
@@ -26,6 +27,10 @@ export const ROUTES: Array<RouteObject> = [
       {
         path: "/rules",
         element: <RulesPage />
+      },
+      {
+        path: "/game",
+        element: <GamePage />
       }
     ]
   }

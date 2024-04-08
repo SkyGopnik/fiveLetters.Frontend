@@ -1,0 +1,19 @@
+.score {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 4px;
+
+  color: #ffffff;
+}
+
+.description {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+}
