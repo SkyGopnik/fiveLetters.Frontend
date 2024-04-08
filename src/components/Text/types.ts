@@ -13,6 +13,6 @@ export type TextType =
   | "b5";
 
 export type TextProps = {
-  type: TextType;
-  tag?: string;
+  type: TextType,
+  tag?: string
 } & DivProps;
