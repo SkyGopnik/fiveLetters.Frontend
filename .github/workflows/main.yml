@@ -34,5 +34,6 @@ jobs:
             git pull
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
+            nvm use 20.10.0
             npm i
             npm run build
