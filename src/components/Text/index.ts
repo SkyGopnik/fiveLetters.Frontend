@@ -1,2 +1,2 @@
-export type { TextProps, TextTag } from "./types";
+export type { TextProps, TextType } from "./types";
 export * from "./text";
