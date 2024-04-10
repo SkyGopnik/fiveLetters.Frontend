@@ -1,13 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
+import { KeyboardUtil } from "pages/Game/_utils/keyboard/keyboard";
+
+import { Button } from "components/Button";
 import { Close } from "components/Close";
 
-import { Field, FieldProps, Keyboard, Score } from "./_components";
+import { Field, FieldLetter, FieldProps, Keyboard, Score } from "./_components";
 
 import style from "./index.module.scss";
 
 export default function GamePage() {
-  const [words, setWords] = useState<FieldProps["words"]>([]);
+  const [words] = useState<FieldProps["words"]>([]);
+  const [activeWord, setActiveWord] = useState<Array<string>>(
+    Array(5).fill("")
+  );
 
   useEffect(() => {
     document.addEventListener("keyup", handleKeyup);
@@ -15,45 +21,62 @@ export default function GamePage() {
     return () => document.removeEventListener("keyup", handleKeyup);
   });
 
-  useEffect(() => {
-    setWords(
-      [...Array(6)].map(() => ({
-        type: "INPUT",
-        letters: [...Array(5)].map(() => ({
-          type: "DEFAULT",
-          value: ""
-        }))
-      }))
-    );
-  }, []);
-
   const handleKeyup = (e: KeyboardEvent) => {
-    const activeRowIndex = words.findIndex((item) => item.type === "INPUT");
+    const newActiveWord = [...activeWord];
+    const lastLetterIndex = newActiveWord.findIndex((letter) => !letter);
 
-    if (activeRowIndex === -1) {
-      return;
+    if (["Backspace", "Delete"].includes(e.key)) {
+      let newLetterIndex = lastLetterIndex - 1;
+
+      if (lastLetterIndex === -1) {
+        newLetterIndex = newActiveWord.length - 1;
+      }
+
+      if (newLetterIndex < 0) {
+        return;
+      }
+
+      newActiveWord[newLetterIndex] = "";
+    } else {
+      if (lastLetterIndex === -1) {
+        return;
+      }
+
+      newActiveWord[lastLetterIndex] = KeyboardUtil.validateInput(e);
     }
 
-    const newWords = [...words];
-    const activeRow = newWords[activeRowIndex];
-
-    const lastLetterIndex = activeRow.letters.findIndex((item) => !item.value);
-
-    if (lastLetterIndex === -1) {
-      return;
-    }
-
-    activeRow.letters[lastLetterIndex].value = e.key;
-
-    setWords(newWords);
+    setActiveWord(newActiveWord);
   };
+
+  const handleCheckWord = () => {
+    //
+  };
+
+  const actionDisabled = useMemo(() => (
+    activeWord.findIndex((letter) => !letter) !== -1
+  ), [activeWord]);
+
+  const formattedActiveWord: Array<FieldLetter> = useMemo(() => (
+    activeWord.map((letter) => ({
+      type: "DEFAULT",
+      value: letter
+    }))
+  ), [activeWord]);
 
   return (
     <div className={style.page}>
       <Close />
       <Score className={style.score} value={0} />
-      <Field className={style.field} words={words} />
+      <Field className={style.field} words={[...words, formattedActiveWord]} />
       <Keyboard className={style.keyboard} />
+      <Button
+        className={style.action}
+        color="black"
+        disabled={actionDisabled}
+        onClick={handleCheckWord}
+      >
+        Проверить слово
+      </Button>
     </div>
   );
 }

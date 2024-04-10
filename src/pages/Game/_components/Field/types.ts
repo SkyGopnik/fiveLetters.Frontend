@@ -12,8 +12,5 @@ export type FieldLetter = {
 };
 
 export type FieldProps = {
-  words: Array<{
-    type: "INPUT" | "READY",
-    letters: Array<FieldLetter>
-  }>
+  words: Array<Array<FieldLetter>>
 } & DivProps;
