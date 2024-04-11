@@ -27,6 +27,9 @@ jobs:
         with:
           node-version: "20.11.0"
 
+      - name: 🔧 Install packages
+        run: npm i
+
       - name: ⚒️ Build
         run: npm run build
       
