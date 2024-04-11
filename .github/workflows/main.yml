@@ -22,18 +22,19 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-
-      - name: Pull, build & restart
-        uses: appleboy/ssh-action@master
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          host: ${{ secrets.SSH_HOST }}
+          node-version: "20.11.0"
+
+      - name: ⚒️ Build
+        run: npm run build
+      
+      - name: 📂 Upload build artifacts
+        uses: SamKirkland/FTP-Deploy-Action@4.3.3
+        with:
+          server: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
-          script: |
-            cd /home/admin/fiveLetters/frontend
-            git pull
-            export NVM_DIR=~/.nvm
-            source ~/.nvm/nvm.sh
-            nvm use 20.10.0
-            npm i
-            npm run build
+          local-dir: ./dist
+          server-dir: ${{ secrets.FTP_UPLOAD_DIR }}
