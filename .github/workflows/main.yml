@@ -39,5 +39,5 @@ jobs:
           server: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
-          local-dir: ./dist
+          local-dir: ./dist/
           server-dir: ${{ secrets.FTP_UPLOAD_DIR }}
