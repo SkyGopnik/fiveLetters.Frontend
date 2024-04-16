@@ -1,16 +1,6 @@
 import { DivProps } from "react-html-props";
-
-export type FieldLetterType =
-  "DEFAULT"
-  | "CORRECT"
-  | "EXIST"
-  | "INCORRECT";
-
-export type FieldLetter = {
-  type: FieldLetterType,
-  value: string
-};
+import { WordStoreLetter } from "store";
 
 export type FieldProps = {
-  words: Array<Array<FieldLetter>>
+  words: Array<Array<WordStoreLetter>>
 } & DivProps;

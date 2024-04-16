@@ -13,7 +13,7 @@ export const Field = ({ className, words, ...props }: FieldProps) => {
       ...words,
       ...[...Array(emptyRows)].map(() => (
         [...Array(5)].map(() => ({
-          type: "DEFAULT",
+          state: "DEFAULT",
           value: ""
         }))
       ))
@@ -34,11 +34,14 @@ export const Field = ({ className, words, ...props }: FieldProps) => {
             <div
               className={classNames(
                 style.item,
-                { [style.itemEntered]: letter.value }
+                { [style.itemEntered]: letter.value },
+                { [style.itemCorrect]: letter.state === "CORRECT" },
+                { [style.itemExist]: letter.state === "EXIST" },
+                { [style.itemIncorrect]: letter.state === "INCORRECT" }
               )}
               key={letterIndex}
             >
-              {letter.value}
+              {letter.value.toUpperCase()}
             </div>
           ))}
         </div>

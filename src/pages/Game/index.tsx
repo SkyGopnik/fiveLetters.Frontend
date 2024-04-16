@@ -1,19 +1,23 @@
+import axios from "axios";
 import { useEffect, useMemo, useState } from "react";
+import { useGameStore, useWordsStore, WordStoreLetter } from "store";
 
 import { KeyboardUtil } from "pages/Game/_utils/keyboard/keyboard";
 
 import { Button } from "components/Button";
 import { Close } from "components/Close";
 
-import { Field, FieldLetter, FieldProps, Keyboard, Score } from "./_components";
+import { Field, Keyboard, Score } from "./_components";
 
 import style from "./index.module.scss";
 
 export default function GamePage() {
-  const [words] = useState<FieldProps["words"]>([]);
   const [activeWord, setActiveWord] = useState<Array<string>>(
     Array(5).fill("")
   );
+
+  const { game, setGame } = useGameStore();
+  const { words, setWords } = useWordsStore();
 
   useEffect(() => {
     document.addEventListener("keyup", handleKeyup);
@@ -48,17 +52,43 @@ export default function GamePage() {
     setActiveWord(newActiveWord);
   };
 
-  const handleCheckWord = () => {
-    //
+  const handleCheckWord = async () => {
+    try {
+      const currentWord = activeWord.join("");
+
+      const { data } = await axios.post(
+        "/game/guess/" + game?.id,
+        currentWord
+      );
+
+      if (data.type === "NOT_GUESSED") {
+        setWords([...words, data.checkedWord.letters]);
+
+        setActiveWord(
+          Array(5).fill("")
+        );
+      } else if (data.type === "GUESSED") {
+        setGame({
+          ...game!,
+          score: data.score
+        });
+        setWords([]);
+        setActiveWord(Array(5).fill(""));
+      }
+
+      console.log(data);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   const actionDisabled = useMemo(() => (
     activeWord.findIndex((letter) => !letter) !== -1
   ), [activeWord]);
 
-  const formattedActiveWord: Array<FieldLetter> = useMemo(() => (
+  const formattedActiveWord: Array<WordStoreLetter> = useMemo(() => (
     activeWord.map((letter) => ({
-      type: "DEFAULT",
+      state: "DEFAULT",
       value: letter
     }))
   ), [activeWord]);
@@ -66,7 +96,7 @@ export default function GamePage() {
   return (
     <div className={style.page}>
       <Close />
-      <Score className={style.score} value={0} />
+      <Score className={style.score} value={game?.score || 0} />
       <Field className={style.field} words={[...words, formattedActiveWord]} />
       <Keyboard className={style.keyboard} />
       <Button

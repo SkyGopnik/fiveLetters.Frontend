@@ -15,11 +15,11 @@ if (document.location.href) {
     `VK ${document.location.href.replace("file", "https")}`;
 }
 
-axios.defaults.baseURL = "https://googler-api.skyreglis.com/";
+axios.defaults.baseURL = "https://five-letters-api.skgopnik.ru/";
 axios.defaults.responseType = "json";
 
 const router = createMemoryRouter(ROUTES, {
-  initialEntries: ["/game"]
+  initialEntries: ["/main"]
 });
 
 bridge.send("VKWebAppInit")
