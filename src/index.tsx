@@ -19,7 +19,7 @@ axios.defaults.baseURL = "https://five-letters-api.skgopnik.ru/";
 axios.defaults.responseType = "json";
 
 const router = createMemoryRouter(ROUTES, {
-  initialEntries: ["/main"]
+  initialEntries: ["/"]
 });
 
 bridge.send("VKWebAppInit")

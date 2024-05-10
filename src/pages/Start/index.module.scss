@@ -1,7 +1,16 @@
-.logo {
-  position: absolute;
-}
+.content {
+  height: 100%;
 
-.button {
-  margin: auto 20px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  .logo {
+    position: absolute;
+  }
+
+  .button {
+    margin-top: auto;
+  }
 }

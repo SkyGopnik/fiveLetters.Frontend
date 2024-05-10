@@ -36,15 +36,15 @@
   }
 
   .letter {
-    width: 80px;
-    height: 80px;
+    width: 50px;
+    height: 50px;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    @include font.type("h1");
+    @include font.type("b3");
 
-    border-radius: 20px;
+    border-radius: 12px;
   }
 }

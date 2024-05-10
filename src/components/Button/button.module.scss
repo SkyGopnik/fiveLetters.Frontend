@@ -3,54 +3,54 @@
 
 .buttonColor {
   &_white {
-    color: #000;
-    background: #fff;
+    color: var(--base-black);
+    background: var(--base-white);
   }
 
   &_black {
-    color: #ffffff;
-    background: #262626;
+    color: var(--base-white);
+    background: var(--neutral-800);
   }
 
   &_amber {
-    color: #fff;
-    background: #d97706;
+    color: var(--base-white);
+    background: var(--amber-600);
   }
 
   &_red {
-    color: #fff;
-    background: #dc2626;
+    color: var(--base-white);
+    background: var(--red-600);
   }
 
   &_green {
-    color: #fff;
-    background: #65a30d;
+    color: var(--base-white);
+    background: var(--lime-600);
   }
 
   &_cyan {
-    color: #fff;
-    background: #0891b2;
+    color: var(--base-white);
+    background: var(--cyan-600);
   }
 
   &_blue {
-    color: #fff;
-    background: #1d4ed8;
+    color: var(--base-white);
+    background: var(--blue-700);
   }
 
   &_violet {
-    color: #fff;
-    background: #7c3aed;
+    color: var(--base-white);
+    background: var(--violet-600);
   }
 
   &_gray {
-    color: #fff;
-    background: #525252;
+    color: var(--base-white);
+    background: var(--neutral-600);
   }
 }
 
 .button {
   width: 100%;
-  height: 60px;
+  height: 48px;
 
   display: flex;
   align-items: center;
@@ -74,7 +74,7 @@
   &:disabled {
     pointer-events: none;
 
-    color: #404040;
-    background: #262626;
+    color: var(--neutral-700);
+    background: var(--neutral-800);
   }
 }

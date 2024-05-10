@@ -1,25 +1,19 @@
 .stepper {
-  margin-top: auto;
-  padding: 30px 20px;
+  height: 100%;
 
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   flex-direction: column;
-  gap: 110px;
+  gap: 120px;
 
-  @media screen and (max-height: 760px) {
-    height: 100vh;
-
-    justify-content: flex-end;
-
+  @media screen and (max-height: 650px) {
     gap: 80px;
-  }
-
-  @media screen and (max-height: 730px) {
-    gap: 50px;
   }
 }
 
 .image {
   max-width: 100%;
+
+  margin-top: 50px;
 }

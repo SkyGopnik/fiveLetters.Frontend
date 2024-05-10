@@ -4,10 +4,13 @@ import { useNavigate } from "react-router";
 import { useGameStore, useWordsStore, WordStoreLetter } from "store";
 
 import { Button } from "components/Button";
+import { Container } from "components/Container";
 
 import { Stats } from "./_components/Stats";
 
 import { useAsyncEffect } from "hooks/useAsyncEffect";
+
+import { ApiUtil } from "utils/api";
 
 import LogoIcon from "./_assets/logo.svg";
 
@@ -15,6 +18,7 @@ import style from "./index.module.scss";
 
 export default function MainPage() {
   const [isGameActive, setIsGameActive] = useState(false);
+  const [isGameLoading, setIsGameLoading] = useState(true);
 
   const navigate = useNavigate();
 
@@ -23,11 +27,13 @@ export default function MainPage() {
 
   useAsyncEffect(async () => {
     try {
-      await axios.get("/game/active");
+      await ApiUtil.game.checkActive();
       setIsGameActive(true);
     } catch (e) {
       console.error(e);
     }
+
+    setIsGameLoading(false);
   }, []);
 
   const startGame = async () => {
@@ -41,15 +47,19 @@ export default function MainPage() {
       setGame(data.game);
       console.log(data);
 
-      navigate("/game");
+      navigate("/rules");
     } catch (e) {
       console.error(e);
     }
   };
 
+  if (isGameLoading) {
+    return null;
+  }
+
   return (
-    <div className={style.main}>
-      <LogoIcon />
+    <Container className={style.main}>
+      <LogoIcon className={style.logo} />
       <Stats score={20000} record={2} />
       <div className={style.actions}>
         <Button onClick={startGame}>
@@ -57,6 +67,6 @@ export default function MainPage() {
         </Button>
         <Button color="cyan">Рейтинг</Button>
       </div>
-    </div>
+    </Container>
   );
 }

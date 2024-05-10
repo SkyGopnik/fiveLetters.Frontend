@@ -22,7 +22,7 @@ export const Stepper: FunctionComponent<Props> = (
     <Text className={style.title} type="h2" tag="h1">
       {title}
     </Text>
-    <Text className={style.description} type="b5">
+    <Text className={style.description} type="b4">
       {description}
     </Text>
     <div className={style.actions}>

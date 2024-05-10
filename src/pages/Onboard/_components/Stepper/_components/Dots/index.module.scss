@@ -11,14 +11,14 @@
 
     transition: .3s ease;
 
-    background: #e5e5e5;
+    background: var(--neutral-200);
 
     &Active {
       width: 30px;
 
       border-radius: 20px;
 
-      background: #000;
+      background: var(--base-black);
     }
   }
 }

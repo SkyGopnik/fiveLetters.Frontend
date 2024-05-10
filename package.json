@@ -22,6 +22,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-router-dom": "6.22.1",
+    "react-swipeable": "7.0.1",
     "sass": "1.58.0",
     "zustand": "4.4.7"
   },
