@@ -20,7 +20,7 @@ export const Score: FunctionComponent<Props> = ({ value, ...props }) => (
       props.className
     )}
   >
-    <Text type="h4">Общий счет</Text>
+    <Text type="h5">Общий счет</Text>
     <Text className={style.description} type="b2">
       <span>{value}</span>
       <StarIcon className={style.icon} />

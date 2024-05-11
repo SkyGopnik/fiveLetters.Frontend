@@ -24,14 +24,14 @@
   &:nth-child(2) {
     .letter {
       color: #ffffff;
-      background: #0e7490;
+      background: var(--cyan-700);
     }
   }
 
   &:nth-child(3) {
     .letter {
-      color: #0e7490;
-      background: #0891b2;
+      color: var(--cyan-700);
+      background: var(--cyan-600);
     }
   }
 

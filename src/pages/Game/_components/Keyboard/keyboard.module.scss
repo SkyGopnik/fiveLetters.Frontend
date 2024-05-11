@@ -22,15 +22,17 @@
 
   @include font.type("h5");
 
+  cursor: pointer;
+
   outline: none;
 
   border: none;
   border-radius: 8px;
 
-  color: #ffffff;
-  background: #262626;
+  color: var(--base-white);
+  background: var(--neutral-800);
 
   &Remove {
-    width: 65px;
+    min-width: 65px;
   }
 }

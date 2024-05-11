@@ -1,15 +1,13 @@
-.close {
-  padding: 0 9px;
+.icon {
+  position: absolute;
+  top: 20px;
+  left: 20px;
 
-  display: flex;
+  cursor: pointer;
 
-  .icon {
-    cursor: pointer;
+  transition: opacity .3s ease;
 
-    transition: opacity .3s ease;
-
-    &:hover {
-      opacity: .7;
-    }
+  &:hover {
+    opacity: .7;
   }
 }

@@ -1,10 +1,13 @@
 .score {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  gap: 4px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
 
-  color: #ffffff;
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+
+  color: var(--base-white);
 }
 
 .description {

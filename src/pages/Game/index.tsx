@@ -1,56 +1,28 @@
 import axios from "axios";
-import { useEffect, useMemo, useState } from "react";
-import { useGameStore, useWordsStore, WordStoreLetter } from "store";
-
-import { KeyboardUtil } from "pages/Game/_utils/keyboard/keyboard";
+import { useGameStore, useWordsStore } from "store";
 
 import { Button } from "components/Button";
 import { Close } from "components/Close";
+import { Container } from "components/Container";
 
 import { Field, Keyboard, Score } from "./_components";
+
+import { useActiveWord } from "./_hooks/useActiveWord";
 
 import style from "./index.module.scss";
 
 export default function GamePage() {
-  const [activeWord, setActiveWord] = useState<Array<string>>(
-    Array(5).fill("")
-  );
+  const {
+    activeWord,
+    formattedToFieldActiveWord,
+    isActiveWordEmpty,
+    clearActiveWord,
+    handleKeyClick,
+    handleDeleteClick
+  } = useActiveWord();
 
   const { game, setGame } = useGameStore();
   const { words, setWords } = useWordsStore();
-
-  useEffect(() => {
-    document.addEventListener("keyup", handleKeyup);
-
-    return () => document.removeEventListener("keyup", handleKeyup);
-  });
-
-  const handleKeyup = (e: KeyboardEvent) => {
-    const newActiveWord = [...activeWord];
-    const lastLetterIndex = newActiveWord.findIndex((letter) => !letter);
-
-    if (["Backspace", "Delete"].includes(e.key)) {
-      let newLetterIndex = lastLetterIndex - 1;
-
-      if (lastLetterIndex === -1) {
-        newLetterIndex = newActiveWord.length - 1;
-      }
-
-      if (newLetterIndex < 0) {
-        return;
-      }
-
-      newActiveWord[newLetterIndex] = "";
-    } else {
-      if (lastLetterIndex === -1) {
-        return;
-      }
-
-      newActiveWord[lastLetterIndex] = KeyboardUtil.validateInput(e);
-    }
-
-    setActiveWord(newActiveWord);
-  };
 
   const handleCheckWord = async () => {
     try {
@@ -63,50 +35,43 @@ export default function GamePage() {
 
       if (data.type === "NOT_GUESSED") {
         setWords([...words, data.checkedWord.letters]);
-
-        setActiveWord(
-          Array(5).fill("")
-        );
       } else if (data.type === "GUESSED") {
         setGame({
           ...game!,
           score: data.score
         });
         setWords([]);
-        setActiveWord(Array(5).fill(""));
       }
 
       console.log(data);
     } catch (e) {
       console.error(e);
     }
+
+    clearActiveWord();
   };
 
-  const actionDisabled = useMemo(() => (
-    activeWord.findIndex((letter) => !letter) !== -1
-  ), [activeWord]);
-
-  const formattedActiveWord: Array<WordStoreLetter> = useMemo(() => (
-    activeWord.map((letter) => ({
-      state: "DEFAULT",
-      value: letter
-    }))
-  ), [activeWord]);
-
   return (
-    <div className={style.page}>
+    <Container className={style.page}>
       <Close />
-      <Score className={style.score} value={game?.score || 0} />
-      <Field className={style.field} words={[...words, formattedActiveWord]} />
-      <Keyboard className={style.keyboard} />
+      <Score value={game?.score || 0} />
+      <Field
+        className={style.field}
+        words={[...words, formattedToFieldActiveWord]}
+      />
+      <Keyboard
+        className={style.keyboard}
+        onKeyClick={handleKeyClick}
+        onDeleteClick={handleDeleteClick}
+      />
       <Button
         className={style.action}
         color="black"
-        disabled={actionDisabled}
+        disabled={isActiveWordEmpty}
         onClick={handleCheckWord}
       >
         Проверить слово
       </Button>
-    </div>
+    </Container>
   );
 }

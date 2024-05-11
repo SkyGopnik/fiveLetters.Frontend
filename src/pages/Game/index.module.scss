@@ -1,24 +1,19 @@
 .page {
   height: 100%;
 
-  padding: 30px 20px;
-
   display: flex;
   flex-direction: column;
 }
 
-.score {
-  margin-top: 8px;
-}
-
 .field {
-  margin-top: 36px;
+  margin-top: 88px;
 }
 
 .keyboard {
   margin-top: auto;
+  padding: 0 3px;
 }
 
 .action {
-  margin-top: 20px;
+  margin-top: 12px;
 }

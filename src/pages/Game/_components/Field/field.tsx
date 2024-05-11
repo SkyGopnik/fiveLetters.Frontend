@@ -1,13 +1,29 @@
 import classNames from "classnames";
-import { useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 
 import { FieldProps } from "./types";
 
 import style from "./field.module.scss";
 
 export const Field = ({ className, words, ...props }: FieldProps) => {
+  const fieldRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const container = fieldRef.current;
+
+    if (!container) {
+      return;
+    }
+
+    container.scrollTop = container.scrollHeight;
+  }, [words]);
+
   const formattedWords = useMemo(() => {
-    const emptyRows = 6 - words.length;
+    let emptyRows = 6 - words.length;
+
+    if (emptyRows < 0) {
+      emptyRows = 0;
+    }
 
     return [
       ...words,
@@ -27,6 +43,7 @@ export const Field = ({ className, words, ...props }: FieldProps) => {
         style.field,
         className
       )}
+      ref={fieldRef}
     >
       {formattedWords.map((word, wordIndex) => (
         <div className={style.row} key={wordIndex}>

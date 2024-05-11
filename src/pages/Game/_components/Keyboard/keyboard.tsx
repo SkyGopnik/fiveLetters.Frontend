@@ -8,7 +8,14 @@ import { KeyboardProps } from "./types";
 
 import style from "./keyboard.module.scss";
 
-export const Keyboard = ({ className, ...props }: KeyboardProps) => {
+export const Keyboard = (
+  {
+    className,
+    onKeyClick,
+    onDeleteClick,
+    ...props
+  }: KeyboardProps
+) => {
   return (
     <div
       {...props}
@@ -20,14 +27,24 @@ export const Keyboard = ({ className, ...props }: KeyboardProps) => {
       {KEYBOARD_INDEXES.map((indexes, index) => (
         <div className={style.row} key={index}>
           {KEYBOARD_LETTERS.slice(...indexes).map((letter) => (
-            <button className={style.item} key={letter}>
+            <button
+              className={style.item}
+              key={letter}
+              onClick={() => onKeyClick?.(letter.toLowerCase())}
+            >
               {letter}
             </button>
           ))}
           {index === KEYBOARD_INDEXES.length - 1 && (
-            <div className={classNames(style.item, style.itemRemove)}>
+            <button
+              className={classNames(
+                style.item,
+                style.itemRemove
+              )}
+              onClick={onDeleteClick}
+            >
               <RemoveIcon />
-            </div>
+            </button>
           )}
         </div>
       ))}

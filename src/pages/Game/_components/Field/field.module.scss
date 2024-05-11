@@ -1,20 +1,24 @@
 @use "style/mixins/font";
 
 .field {
+  height: 320px;
+
   display: flex;
   align-items: center;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
+
+  overflow-y: auto;
 }
 
 .row {
   display: flex;
-  gap: 15px;
+  gap: 12px;
 }
 
 .item {
-  width: 50px;
-  height: 50px;
+  width: 45px;
+  height: 45px;
 
   display: flex;
   align-items: center;
@@ -26,25 +30,25 @@
 
   border-radius: 12px;
 
-  color: #ffffff;
-  background: #67e8f9;
+  color: var(--base-white);
+  background: var(--cyan-300);
 
   &Entered {
-    background: #262626;
+    background: var(--neutral-800);
   }
 
   &Correct {
-    color: #06b6d4;
-    background: #ffffff;
+    color: var(--cyan-500);
+    background: var(--base-white);
   }
 
   &Exist {
-    color: #ffffff;
-    background: #0e7490;
+    color: var(--base-white);
+    background: var(--cyan-700);
   }
 
   &Incorrect {
-    color: #0e7490;
-    background: #0891b2;
+    color: var(--cyan-700);
+    background: var(--cyan-600);
   }
 }

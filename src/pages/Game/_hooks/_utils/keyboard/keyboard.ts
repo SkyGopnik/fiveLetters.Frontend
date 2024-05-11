@@ -2,9 +2,9 @@ import { translitMap } from "./constants";
 
 export class KeyboardUtil {
 
-  static validateInput(e: KeyboardEvent): string {
+  static validateInput(key: string): string {
     const findedRussianByRussianLetter = translitMap.find(
-      (item) => item[1] === e.key
+      (item) => item[1] === key
     );
 
     if (findedRussianByRussianLetter) {
@@ -12,7 +12,7 @@ export class KeyboardUtil {
     }
 
     const findedRussianByEnglishLetter = translitMap.find(
-      ([englishLetter]) => englishLetter === e.key
+      ([englishLetter]) => englishLetter === key
     );
 
     if (findedRussianByEnglishLetter) {
