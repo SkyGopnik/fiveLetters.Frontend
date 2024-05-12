@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { useNavigate } from "react-router";
 import { useGameStore, useWordsStore } from "store";
 
@@ -28,7 +28,21 @@ export default function GamePage() {
 
   const navigate = useNavigate();
 
-  const handleCheckWord = async () => {
+  useEffect(() => {
+    document.addEventListener("keyup", handleKeyup);
+
+    return () => document.removeEventListener("keyup", handleKeyup);
+  });
+
+  const handleKeyup = async (e: KeyboardEvent) => {
+    if (e.key !== "Enter" || isActiveWordEmpty) {
+      return;
+    }
+
+    await checkWord();
+  };
+
+  const checkWord = async () => {
     try {
       const currentWord = activeWord.join("");
 
@@ -75,10 +89,9 @@ export default function GamePage() {
     <Container className={style.page}>
       <Close onClick={() => navigate(-1)} />
       <Score value={game?.score || 0} />
-      <Field
-        className={style.field}
-        words={[...words, formattedToFieldActiveWord]}
-      />
+      <div className={style.field}>
+        <Field words={[...words, formattedToFieldActiveWord]} />
+      </div>
       <Keyboard
         className={style.keyboard}
         letters={activeLetters}
@@ -89,7 +102,7 @@ export default function GamePage() {
         className={style.action}
         color="black"
         disabled={isActiveWordEmpty}
-        onClick={handleCheckWord}
+        onClick={checkWord}
       >
         Проверить слово
       </Button>

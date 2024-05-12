@@ -47,10 +47,19 @@ export default function RulesPage() {
   return (
     <Container className={style.page}>
       <Close onClick={startGame} />
-      <Text className={style.title} type="h1" tag="h1">
-        Правила игры
-      </Text>
-      <Rules className={style.rules} />
+      <div className={style.content}>
+        <Text className={style.title} type="h1" tag="h1">
+          Правила игры
+        </Text>
+        <Rules
+          className={style.rules}
+          rules={[
+            "правильная позиция\nбуквы в слове",
+            "неправильная позиция\nбуквы в слове",
+            "отсутствие\nбуквы в слове"
+          ]}
+        />
+      </div>
       <div className={style.actions}>
         <Button onClick={startGame}>Начать игру</Button>
         <Button

@@ -1,24 +1,22 @@
 import classNames from "classnames";
 import { FunctionComponent } from "react";
-import { DivProps } from "react-html-props";
 
 import { Text } from "components/Text";
 
+import { RulesProps } from "./types";
+
 import style from "./rules.module.scss";
 
-export const Rules: FunctionComponent<DivProps> = (
-  { className, ...rest }
+export const Rules: FunctionComponent<RulesProps> = (
+  { className, rules, ...rest }
 ) => (
   <div {...rest} className={classNames(style.rules, className)}>
-    {[...Array(3)].map((_, index) => (
+    {rules.map((rule, index) => (
       <div className={style.item} key={index}>
         <div className={style.letter}>
           A
         </div>
-        <Text type="b3">
-          правильная позиция <br />
-          буквы в слове
-        </Text>
+        <Text type="b3">{rule}</Text>
       </div>
     ))}
   </div>

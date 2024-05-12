@@ -33,13 +33,18 @@
   color: var(--base-white);
   background: var(--cyan-300);
 
+  @media screen and (min-width: 420px) and (min-height: 700px) {
+    width: 55px;
+    height: 55px;
+  }
+
   &Entered {
     background: var(--neutral-800);
   }
 
-  &Correct {
-    color: var(--cyan-500);
-    background: var(--base-white);
+  &Incorrect {
+    color: var(--cyan-700);
+    background: var(--cyan-600);
   }
 
   &Exist {
@@ -47,8 +52,8 @@
     background: var(--cyan-700);
   }
 
-  &Incorrect {
-    color: var(--cyan-700);
-    background: var(--cyan-600);
+  &Correct {
+    color: var(--cyan-500);
+    background: var(--base-white);
   }
 }

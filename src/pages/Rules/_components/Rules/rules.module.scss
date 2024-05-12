@@ -2,15 +2,19 @@
 
 .rules {
   display: flex;
+  align-items: center;
   flex-direction: column;
   gap: 30px;
 }
 
 .item {
+  width: 265px;
+
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 20px;
+
+  white-space: pre-wrap;
 
   color: #ffffff;
 
