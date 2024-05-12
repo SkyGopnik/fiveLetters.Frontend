@@ -2,7 +2,7 @@ import { Outlet } from "react-router";
 
 import { Background } from "components/Background";
 
-export const DefaultLayout = () => (
+export const BackgroundLayout = () => (
   <Background>
     <Outlet />
   </Background>

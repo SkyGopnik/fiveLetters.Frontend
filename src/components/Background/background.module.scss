@@ -2,7 +2,7 @@
   width: 100vw;
   height: 100vh;
 
-  position: absolute;
+  position: fixed;
 
   display: flex;
   align-items: center;
@@ -37,3 +37,22 @@
     z-index: 20;
   }
 }
+
+@mixin generate-type($type, $rectColor, $pathColor) {
+  .backgroundType_#{$type} {
+    background-color: $pathColor;
+
+    .pattern {
+      rect {
+        fill: $rectColor;
+      }
+
+      path {
+        fill: $pathColor;
+      }
+    }
+  }
+}
+
+@include generate-type("cyan", var(--cyan-400), var(--cyan-500));
+@include generate-type("red", var(--red-400), var(--red-500));

@@ -7,7 +7,7 @@ import { CloseProps } from "./types";
 import style from "./close.module.scss";
 
 export const Close: FunctionComponent<CloseProps> = (
-  { type = "blue", ...props }
+  { type = "cyan", ...props }
 ) => (
   createElement(ICONS[type], {
     className: style.icon,

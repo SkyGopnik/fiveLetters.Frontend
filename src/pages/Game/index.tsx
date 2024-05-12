@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useNavigate } from "react-router";
 import { useGameStore, useWordsStore } from "store";
 
 import { Button } from "components/Button";
@@ -24,6 +25,8 @@ export default function GamePage() {
   const { game, setGame } = useGameStore();
   const { words, setWords } = useWordsStore();
 
+  const navigate = useNavigate();
+
   const handleCheckWord = async () => {
     try {
       const currentWord = activeWord.join("");
@@ -41,6 +44,10 @@ export default function GamePage() {
           score: data.score
         });
         setWords([]);
+      } else if (data.type === "ENG_GAME") {
+        navigate("/game/failed?word=" + data.hiddenWord);
+      } else if (data.type === "EXTRA_LIFE") {
+        navigate("/game/extra");
       }
 
       console.log(data);

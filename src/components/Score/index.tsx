@@ -1,24 +1,24 @@
 import classNames from "classnames";
 import { FunctionComponent } from "react";
-import { DivProps } from "react-html-props";
 
 import { Text } from "components/Text";
 
 import StarIcon from "assets/star.svg";
 
+import { ScoreProps } from "./types";
+
 import style from "./index.module.scss";
 
-interface Props extends DivProps{
-  value: number
-}
-
-export const Score: FunctionComponent<Props> = ({ value, ...props }) => (
+export const Score: FunctionComponent<ScoreProps> = (
+  { className, type = "game", value, ...props }
+) => (
   <div
-    {...props}
     className={classNames(
       style.score,
-      props.className
+      style[`scoreType_${type}`],
+      className
     )}
+    {...props}
   >
     <Text type="h5">Общий счет</Text>
     <Text className={style.description} type="b2">
