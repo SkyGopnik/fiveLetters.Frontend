@@ -6,9 +6,17 @@
   color: var(--base-white);
 }
 
-.placeholderType_failed {
-  .word {
-    color: var(--red-500);
+.placeholderType {
+  &_failed {
+    .word {
+      color: var(--red-500);
+    }
+  }
+
+  &_success {
+    .word {
+      color: var(--lime-500);
+    }
   }
 }
 

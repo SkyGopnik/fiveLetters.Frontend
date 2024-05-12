@@ -27,6 +27,7 @@ export const GameSuccessPage = () => {
     <>
       <Placeholder
         className={style.placeholder}
+        type="success"
         word={word}
         title="Слово отгадано"
         description={`${scoreDelta} звездочка в твой счет`}

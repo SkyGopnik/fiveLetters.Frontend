@@ -73,7 +73,7 @@ export default function GamePage() {
 
   return (
     <Container className={style.page}>
-      <Close />
+      <Close onClick={() => navigate(-1)} />
       <Score value={game?.score || 0} />
       <Field
         className={style.field}
