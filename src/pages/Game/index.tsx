@@ -44,6 +44,10 @@ export default function GamePage() {
           score: data.score
         });
         setWords([]);
+
+        const scoreDelta = data.score - game!.score;
+
+        navigate(`/game/success?word=${currentWord}&delta=${scoreDelta}`);
       } else if (data.type === "END_GAME") {
         navigate("/game/failed?word=" + data.hiddenWord);
       } else if (data.type === "EXTRA_LIFE") {

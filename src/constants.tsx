@@ -6,6 +6,7 @@ import { GameStatusLayout } from "layouts/GameStatus";
 import GamePage from "pages/Game";
 import { GameExtraPage } from "pages/GameExtra";
 import { GameFailedPage } from "pages/GameFailed";
+import { GameSuccessPage } from "pages/GameSuccess";
 import MainPage from "pages/Main";
 import OnboardPage from "pages/Onboard";
 import RulesPage from "pages/Rules";
@@ -52,6 +53,15 @@ export const ROUTES: Array<RouteObject> = [
       {
         path: "/game/extra",
         element: <GameExtraPage />
+      }
+    ]
+  },
+  {
+    element: <GameStatusLayout type="green" />,
+    children: [
+      {
+        path: "/game/success",
+        element: <GameSuccessPage />
       }
     ]
   }

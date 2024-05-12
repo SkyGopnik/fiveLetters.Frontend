@@ -60,7 +60,7 @@ export default function MainPage() {
   return (
     <Container className={style.main}>
       <LogoIcon className={style.logo} />
-      <Stats score={20000} record={2} />
+      <Stats score={-1} record={-1} />
       <div className={style.actions}>
         <Button onClick={startGame}>
           {isGameActive ? "Продолжить" : "Начать"} игру
