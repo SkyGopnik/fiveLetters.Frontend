@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useMemo } from "react";
 import { useNavigate } from "react-router";
 import { useGameStore, useWordsStore } from "store";
 
@@ -62,6 +63,14 @@ export default function GamePage() {
     clearActiveWord();
   };
 
+  const activeLetters = useMemo(
+    () => words.reduce(
+      (acc, value) => acc.concat(value),
+      []
+    ),
+    [words]
+  );
+
   return (
     <Container className={style.page}>
       <Close />
@@ -72,6 +81,7 @@ export default function GamePage() {
       />
       <Keyboard
         className={style.keyboard}
+        letters={activeLetters}
         onKeyClick={handleKeyClick}
         onDeleteClick={handleDeleteClick}
       />

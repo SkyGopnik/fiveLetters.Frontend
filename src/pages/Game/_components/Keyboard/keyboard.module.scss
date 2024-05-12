@@ -32,6 +32,21 @@
   color: var(--base-white);
   background: var(--neutral-800);
 
+  &Correct {
+    color: var(--cyan-500);
+    background: var(--base-white);
+  }
+
+  &Exist {
+    color: var(--base-white);
+    background: var(--cyan-700);
+  }
+
+  &Incorrect {
+    color: var(--cyan-700);
+    background: var(--cyan-600);
+  }
+
   &Remove {
     min-width: 65px;
   }
