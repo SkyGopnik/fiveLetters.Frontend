@@ -56,3 +56,4 @@
 
 @include generate-type("cyan", var(--cyan-400), var(--cyan-500));
 @include generate-type("red", var(--red-400), var(--red-500));
+@include generate-type("blue", var(--blue-400), var(--blue-500));

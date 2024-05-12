@@ -1,5 +1,6 @@
 import { BackgroundType } from "components/Background";
 
 export type GameStatusLayoutProps = {
-  type?: BackgroundType
+  type?: BackgroundType,
+  closeHidden?: boolean
 };

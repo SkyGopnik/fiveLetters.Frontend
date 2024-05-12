@@ -4,6 +4,7 @@ import { BackgroundLayout } from "layouts/Default";
 import { GameStatusLayout } from "layouts/GameStatus";
 
 import GamePage from "pages/Game";
+import { GameExtraPage } from "pages/GameExtra";
 import { GameFailedPage } from "pages/GameFailed";
 import MainPage from "pages/Main";
 import OnboardPage from "pages/Onboard";
@@ -42,6 +43,15 @@ export const ROUTES: Array<RouteObject> = [
       {
         path: "/game/failed",
         element: <GameFailedPage />
+      }
+    ]
+  },
+  {
+    element: <GameStatusLayout type="blue" closeHidden />,
+    children: [
+      {
+        path: "/game/extra",
+        element: <GameExtraPage />
       }
     ]
   }

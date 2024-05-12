@@ -12,7 +12,7 @@ import { GameStatusLayoutProps } from "./types";
 import style from "./index.module.scss";
 
 export const GameStatusLayout: FunctionComponent<GameStatusLayoutProps> = (
-  { type }
+  { type, closeHidden }
 ) => {
   const { game } = useGameStore();
 
@@ -21,7 +21,9 @@ export const GameStatusLayout: FunctionComponent<GameStatusLayoutProps> = (
   return (
     <Background type={type}>
       <Container className={style.page}>
-        <Close type={type} onClick={() => navigate(-1)} />
+        {!closeHidden && (
+          <Close type={type} onClick={() => navigate(-1)} />
+        )}
         <Score type="info" value={game?.score || 0} />
         <Outlet />
       </Container>

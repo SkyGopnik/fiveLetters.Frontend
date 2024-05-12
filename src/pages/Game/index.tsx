@@ -44,7 +44,7 @@ export default function GamePage() {
           score: data.score
         });
         setWords([]);
-      } else if (data.type === "ENG_GAME") {
+      } else if (data.type === "END_GAME") {
         navigate("/game/failed?word=" + data.hiddenWord);
       } else if (data.type === "EXTRA_LIFE") {
         navigate("/game/extra");
