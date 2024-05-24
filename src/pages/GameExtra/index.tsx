@@ -1,4 +1,7 @@
+import axios from "axios";
+import { useState } from "react";
 import { useNavigate } from "react-router";
+import { useGameStore } from "store";
 
 import { Button } from "components/Button";
 import { Placeholder } from "components/Placeholder";
@@ -8,14 +11,28 @@ import Icon from "./_assets/icon.svg";
 import style from "./index.module.scss";
 
 export const GameExtraPage = () => {
+  const [loading, setLoading] = useState(false);
+
+  const { game, setGame } = useGameStore();
   const navigate = useNavigate();
 
   const handleWatch = () => {
     navigate(-1);
   };
 
-  const handleEnd = () => {
-    navigate("/main");
+  const handleEnd = async () => {
+    setLoading(true);
+
+    try {
+      await axios.post("/game/close/" + game?.id);
+      setGame(undefined);
+
+      navigate("/main");
+    } catch (e) {
+      console.error(e);
+    }
+
+    setLoading(false);
   };
 
   return (
@@ -32,6 +49,7 @@ export const GameExtraPage = () => {
         </Button>
         <Button
           color="blue"
+          disabled={loading}
           onClick={handleEnd}
         >
           Завершить игру
