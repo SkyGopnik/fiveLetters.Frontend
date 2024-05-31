@@ -1,30 +1,64 @@
-# React + TypeScript + Vite
+# 5 букв
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Игра, в которой тебе предстоит отгадывать слова из 5 букв и зарабатывать рейтинг! Делись своим результатом и соревнуйся с друзьями!
 
-Currently, two official plugins are available:
+## Разбор команд
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+`prepare` - выполняется при установке зависимостей и необходим для первоначальной настройки проекта
 
-## Expanding the ESLint configuration
+`dev` - запуск проекта для разработки
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+`build` - сборка проекта в файл
 
-- Configure the top-level `parserOptions` property like this:
+`preview` - запуск проекта после сборки
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+`quality` - проверка качества кода
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+`quality:fix` - попытка автоматического исправления качества кода
+
+## Описание модулей
+
+`react` - основной фреймворк, используемый для создания пользовательских интерфейсов
+
+`react-dom` - вспомогательная библиотека для `react`, для управления DOM деревом
+
+`react-router-dom` - библиотека для управления роутингом приложения, переход по страницам, сохранении истории переходов
+
+`react-swipeable` - библиотека для поддержки свайпов на экране обучения
+
+`axios` - библиотека для `HTTP` запросов из браузера, надстройка над стандартным `fetch`, более гибкая и удобная в использовании
+
+`classnames` - утилита для манипулирования классами стилей
+
+`sass` - компилятор стилей в стандартный `css`
+
+`zustand` - библиотека для глобального хранения состояний с использованием хуков
+
+`vite` - библиотека для сборки и запуска приложения
+
+## Линтеры
+
+`commitlint` - проверяет правильность работы с гитом
+
+`stylelint` - проверяет качество написания стилей
+
+`eslint` - проверяет правильность написания кода
+
+## Архитектура приложения
+
+`assets` - иконки, шрифты и т.д
+
+`components` - публичные компоненты
+
+`hooks` - вспомогательные в работе хуки
+
+`layouts` - обертка над страницами, для переиспользования компонентов
+
+`pages` - все страницы приложения
+
+`store` - глобальные состояния
+
+`styles` - глобальные стили
+
+`utils` - вспомогательные утилиты
+
