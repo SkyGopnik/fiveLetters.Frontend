@@ -1,0 +1,40 @@
+.item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  color: var(--base-white);
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+
+  border-radius: 50%;
+}
+
+.score {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+
+  .icon {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+.position {
+  width: 28px;
+  height: 28px;
+
+  margin-left: auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background-color: var(--cyan-600);
+}

@@ -19,6 +19,10 @@ import style from "./index.module.scss";
 export default function MainPage() {
   const [isGameActive, setIsGameActive] = useState(false);
   const [isGameLoading, setIsGameLoading] = useState(true);
+  const [stats, setStats] = useState<{
+    position: number,
+    record: number
+  }>();
 
   const navigate = useNavigate();
 
@@ -29,6 +33,13 @@ export default function MainPage() {
     try {
       await ApiUtil.game.checkActive();
       setIsGameActive(true);
+    } catch (e) {
+      console.error(e);
+    }
+
+    try {
+      const { data } = await axios.get("/game/stats");
+      setStats(data);
     } catch (e) {
       console.error(e);
     }
@@ -60,12 +71,19 @@ export default function MainPage() {
   return (
     <Container className={style.main}>
       <LogoIcon className={style.logo} />
-      <Stats score={-1} record={-1} />
+      {stats && (
+        <Stats {...stats} />
+      )}
       <div className={style.actions}>
         <Button onClick={startGame}>
           {isGameActive ? "Продолжить" : "Начать"} игру
         </Button>
-        <Button color="cyan">Рейтинг</Button>
+        <Button
+          color="cyan"
+          onClick={() => navigate("/rating")}
+        >
+          Рейтинг
+        </Button>
       </div>
     </Container>
   );

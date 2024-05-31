@@ -9,6 +9,7 @@ import { GameFailedPage } from "pages/GameFailed";
 import { GameSuccessPage } from "pages/GameSuccess";
 import MainPage from "pages/Main";
 import OnboardPage from "pages/Onboard";
+import { RatingPage } from "pages/Rating";
 import RulesPage from "pages/Rules";
 import StartPage from "pages/Start";
 
@@ -35,6 +36,10 @@ export const ROUTES: Array<RouteObject> = [
       {
         path: "/game",
         element: <GamePage />
+      },
+      {
+        path: "/rating",
+        element: <RatingPage />
       }
     ]
   },
