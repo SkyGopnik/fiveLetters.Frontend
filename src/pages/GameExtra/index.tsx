@@ -24,7 +24,7 @@ export const GameExtraPage = () => {
     setLoading(true);
 
     try {
-      await axios.post("/game/close/" + game?.id);
+      await axios.delete("/game/close/" + game?.id);
       setGame(undefined);
 
       navigate("/main");

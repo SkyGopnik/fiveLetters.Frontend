@@ -1,5 +1,5 @@
-import axios from "axios";
-import { useEffect, useMemo } from "react";
+import axios, { AxiosError } from "axios";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router";
 import { useGameStore, useWordsStore } from "store";
 
@@ -8,6 +8,7 @@ import { Close } from "components/Close";
 import { Container } from "components/Container";
 
 import { Field, Keyboard, Score } from "./_components";
+import { WordNotFoundModal } from "./_components/WordNotFoundModal";
 
 import { useActiveWord } from "./_hooks/useActiveWord";
 
@@ -18,10 +19,13 @@ export default function GamePage() {
     activeWord,
     formattedToFieldActiveWord,
     isActiveWordEmpty,
+    setActiveWord,
     clearActiveWord,
     handleKeyClick,
     handleDeleteClick
   } = useActiveWord();
+
+  const [isNotFoundModalOpened, setIsNotFoundModalOpened] = useState(false);
 
   const { game, setGame } = useGameStore();
   const { words, setWords } = useWordsStore();
@@ -71,10 +75,26 @@ export default function GamePage() {
 
       console.log(data);
     } catch (e) {
+      if (e instanceof AxiosError) {
+        if (e.response!.status === 404) {
+          setIsNotFoundModalOpened(true);
+        }
+      }
+
       console.error(e);
     }
 
     clearActiveWord();
+  };
+
+  const handleNotFoundWordWatch = async () => {
+    try {
+      const { data } = await axios.get("/game/prompt/" + game?.id);
+      setActiveWord(data.split(""));
+      setIsNotFoundModalOpened(false);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   const activeLetters = useMemo(
@@ -106,6 +126,11 @@ export default function GamePage() {
       >
         Проверить слово
       </Button>
+      <WordNotFoundModal
+        isOpen={isNotFoundModalOpened}
+        onWatch={handleNotFoundWordWatch}
+        onClose={() => setIsNotFoundModalOpened(false)}
+      />
     </Container>
   );
 }

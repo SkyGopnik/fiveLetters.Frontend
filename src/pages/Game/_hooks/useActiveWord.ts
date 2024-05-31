@@ -61,6 +61,7 @@ export const useActiveWord = () => {
 
   return {
     activeWord,
+    setActiveWord,
     handleKeyClick,
     handleDeleteClick,
     clearActiveWord,

@@ -22,7 +22,7 @@ export const GameStatusLayout: FunctionComponent<GameStatusLayoutProps> = (
     <Background type={type}>
       <Container className={style.page}>
         {!closeHidden && (
-          <Close type={type} onClick={() => navigate(-1)} />
+          <Close type={type} onClick={() => navigate("/main")} />
         )}
         <Score type="info" value={game?.score || 0} />
         <Outlet />
