@@ -12,6 +12,10 @@
 
   overflow-y: auto;
 
+  @media screen and (min-width: 420px) and (min-height: 700px) {
+    height: 384px;
+  }
+
   &::-webkit-scrollbar {
     width: 0;
   }
@@ -40,8 +44,8 @@
   background: var(--cyan-300);
 
   @media screen and (min-width: 420px) and (min-height: 700px) {
-    width: 55px;
-    height: 55px;
+    width: 54px;
+    height: 54px;
   }
 
   &Entered {
