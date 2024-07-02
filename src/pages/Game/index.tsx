@@ -27,7 +27,7 @@ export default function GamePage() {
   } = useActiveWord();
 
   const [isNotFoundModalOpened, setIsNotFoundModalOpened] = useState(false);
-  const [isLoading, setLoading] = useState(true);
+  const [isLoading, setLoading] = useState(false);
 
   const { game, setGame } = useGameStore();
   const { words, setWords } = useWordsStore();
@@ -41,7 +41,11 @@ export default function GamePage() {
   });
 
   const handleKeyup = async (e: KeyboardEvent) => {
-    if (e.key !== "Enter" || isActiveWordEmpty) {
+    if (e.key !== "Enter") {
+      return;
+    }
+
+    if (isActiveWordEmpty || isLoading) {
       return;
     }
 
