@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { Navigate, useNavigate } from "react-router";
+import { useMemo } from "react";
+import { useNavigate } from "react-router";
+import { useSearchParams } from "react-router-dom";
 
 import { Button } from "components/Button";
 import { Close } from "components/Close";
@@ -8,45 +9,36 @@ import { Text } from "components/Text";
 
 import { Rules } from "./_components/Rules";
 
-import { useAsyncEffect } from "hooks/useAsyncEffect";
-
 import { StorageUtil } from "utils/storage/storage";
 
 import style from "./index.module.scss";
 
 export default function RulesPage() {
-  const [isRulesSkipped, setIsRulesSkipped] = useState(false);
-  const [isStorageFetched, setIsStorageFetched] = useState(false);
-
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
-  useAsyncEffect(async () => {
-    const data = Boolean(await StorageUtil.get("isRulesSkipped"));
-
-    if (data) {
-      setIsRulesSkipped(true);
-    }
-
-    setIsStorageFetched(true);
-  }, []);
-
-  const startGame = () => {
+  const handleStartGame = () => {
     navigate("/game");
+  };
+
+  const handleBack = () => {
+    navigate(-1);
   };
 
   const skipRules = async () => {
     await StorageUtil.set("isRulesSkipped", "true");
 
-    startGame();
+    handleStartGame();
   };
 
-  if (!isStorageFetched) {
-    return null;
-  }
+  const isClose = useMemo(
+    () => Boolean(searchParams.get("isClose")),
+    [searchParams]
+  );
 
   return (
     <Container className={style.page}>
-      <Close onClick={startGame} />
+      <Close onClick={isClose ? handleBack : handleStartGame} />
       <div className={style.content}>
         <Text className={style.title} type="h1" tag="h1">
           Правила игры
@@ -61,17 +53,24 @@ export default function RulesPage() {
         />
       </div>
       <div className={style.actions}>
-        <Button onClick={startGame}>Начать игру</Button>
-        <Button
-          color="cyan"
-          onClick={skipRules}
-        >
-          Больше не показывать
-        </Button>
+        {isClose ? (
+          <Button color="cyan" onClick={handleBack}>
+            Закрыть
+          </Button>
+        ) : (
+          <>
+            <Button onClick={handleStartGame}>
+              Начать игру
+            </Button>
+            <Button
+              color="cyan"
+              onClick={skipRules}
+            >
+              Больше не показывать
+            </Button>
+          </>
+        )}
       </div>
-      {isRulesSkipped && (
-        <Navigate to="/game" replace={true} />
-      )}
     </Container>
   );
 }

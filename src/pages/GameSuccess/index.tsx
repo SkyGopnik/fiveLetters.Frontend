@@ -2,8 +2,13 @@ import { useMemo } from "react";
 import { useNavigate } from "react-router";
 import { useSearchParams } from "react-router-dom";
 
+import { Info } from "components";
 import { Button } from "components/Button";
 import { Placeholder } from "components/Placeholder";
+
+import { useGufoSearch } from "hooks";
+
+import { declareNumber } from "utils/declare-number";
 
 import Icon from "./_assets/icon.svg";
 
@@ -23,14 +28,25 @@ export const GameSuccessPage = () => {
     [searchParams]
   );
 
+  const starStringFormat = useMemo(
+    () => declareNumber(
+      Number(scoreDelta),
+      ["звездочка", "звездочки", "звездочек"]
+    ),
+    [scoreDelta]
+  );
+
+  const { handleSearch } = useGufoSearch(word);
+
   return (
     <>
+      <Info onClick={handleSearch} />
       <Placeholder
         className={style.placeholder}
         type="success"
         word={word}
         title="Слово отгадано"
-        description={`${scoreDelta} звездочка в твой счет`}
+        description={`${starStringFormat} в твой счет`}
         icon={Icon}
       />
       <div className={style.actions}>

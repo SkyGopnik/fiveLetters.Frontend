@@ -1,33 +1,39 @@
-import axios from "axios";
+import bridge from "@vkontakte/vk-bridge";
 import { useMemo } from "react";
 import { useNavigate } from "react-router";
 import { useSearchParams } from "react-router-dom";
-import { useGameStore, useWordsStore } from "store";
+import { useGameStore } from "store";
 
+import { Info } from "components";
 import { Button } from "components/Button";
 import { Placeholder } from "components/Placeholder";
 
-import { Info } from "./_components";
+import { useGufoSearch } from "hooks";
+
+import { declareNumber } from "utils/declare-number";
 
 import Icon from "./_assets/icon.svg";
 
 import style from "./index.module.scss";
 
 export const GameFailedPage = () => {
-  const { setGame } = useGameStore();
-  const { setWords } = useWordsStore();
+  const { game } = useGameStore();
 
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
-  const startGame = async () => {
+  const handleRepost = async () => {
+    const starStringFormat = declareNumber(
+      Number(game?.score),
+      ["звездочку", "звездочки", "звездочек"]
+    );
+
     try {
-      const { data } = await axios.post("/game/new");
-
-      setWords([]);
-      setGame(data.game);
-
-      navigate("/rules");
+      await bridge.send("VKWebAppShowWallPostBox", {
+        message: `Мой рекорд в игре Вордли составил - ${starStringFormat},
+        присоединяйся и обгони меня!`,
+        attachments: "https://vk.com/app51890728"
+      });
     } catch (e) {
       console.error(e);
     }
@@ -38,9 +44,11 @@ export const GameFailedPage = () => {
     [searchParams]
   );
 
+  const { handleSearch } = useGufoSearch(word);
+
   return (
     <>
-      <Info word={word} />
+      <Info onClick={handleSearch} />
       <Placeholder
         className={style.placeholder}
         word={word}
@@ -49,11 +57,11 @@ export const GameFailedPage = () => {
         icon={Icon}
       />
       <div className={style.actions}>
-        <Button onClick={startGame}>
-          Новая игра
+        <Button onClick={() => navigate("/")}>
+          Главный экран
         </Button>
-        <Button color="red" onClick={() => navigate("/rating")}>
-          Рейтинг
+        <Button color="red" onClick={handleRepost}>
+          Поделиться
         </Button>
       </div>
     </>

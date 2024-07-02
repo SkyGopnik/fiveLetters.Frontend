@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router";
 import { useGameStore, useWordsStore } from "store";
 
+import { Info } from "components";
 import { Button } from "components/Button";
 import { Close } from "components/Close";
 import { Container } from "components/Container";
@@ -10,7 +11,7 @@ import { Container } from "components/Container";
 import { Field, Keyboard, Score } from "./_components";
 import { WordNotFoundModal } from "./_components/WordNotFoundModal";
 
-import { useActiveWord } from "./_hooks/useActiveWord";
+import { useActiveWord } from "./_hooks";
 
 import style from "./index.module.scss";
 
@@ -26,6 +27,7 @@ export default function GamePage() {
   } = useActiveWord();
 
   const [isNotFoundModalOpened, setIsNotFoundModalOpened] = useState(false);
+  const [isLoading, setLoading] = useState(true);
 
   const { game, setGame } = useGameStore();
   const { words, setWords } = useWordsStore();
@@ -47,6 +49,8 @@ export default function GamePage() {
   };
 
   const checkWord = async () => {
+    setLoading(true);
+
     try {
       const currentWord = activeWord.join("");
 
@@ -55,7 +59,14 @@ export default function GamePage() {
         currentWord
       );
 
-      if (data.type === "NOT_GUESSED") {
+      if (
+        data.type === "NOT_GUESSED"
+        || data.type === "EXTRA_LIFE"
+      ) {
+        if (data.type === "EXTRA_LIFE") {
+          navigate("/game/extra");
+        }
+
         setWords([...words, data.checkedWord.letters]);
       } else if (data.type === "GUESSED") {
         setGame({
@@ -69,8 +80,6 @@ export default function GamePage() {
         navigate(`/game/success?word=${currentWord}&delta=${scoreDelta}`);
       } else if (data.type === "END_GAME") {
         navigate("/game/failed?word=" + data.hiddenWord);
-      } else if (data.type === "EXTRA_LIFE") {
-        navigate("/game/extra");
       }
 
       console.log(data);
@@ -84,6 +93,7 @@ export default function GamePage() {
       console.error(e);
     }
 
+    setLoading(false);
     clearActiveWord();
   };
 
@@ -108,6 +118,10 @@ export default function GamePage() {
   return (
     <Container className={style.page}>
       <Close onClick={() => navigate(-1)} />
+      <Info
+        color="cyan"
+        onClick={() => navigate("/rules?isClose=true")}
+      />
       <Score value={game?.score || 0} />
       <div className={style.field}>
         <Field words={[...words, formattedToFieldActiveWord]} />
@@ -121,7 +135,7 @@ export default function GamePage() {
       <Button
         className={style.action}
         color="black"
-        disabled={isActiveWordEmpty}
+        disabled={isActiveWordEmpty || isLoading}
         onClick={checkWord}
       >
         Проверить слово

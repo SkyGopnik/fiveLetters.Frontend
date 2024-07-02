@@ -1,0 +1,36 @@
+ls:
+  src:
+    .dir: kebab-case
+    .ts: camelCase
+    .tsx: camelCase | PascalCase
+    .scss: point.case
+    .d.ts: kebab-case
+    .svg: kebab-case
+    .png: kebab-case
+    .jpg: kebab-case
+    .jpeg: kebab-case
+    '{components,pages,layouts}':
+      .dir: PascalCase | kebab-case
+    style:
+      .scss: lowercase
+      pages:
+        .scss: kebab-case
+    app:
+      .dir: regex:^\([a-z]+[a-zA-Z]*\)?$|^\[[a-z]+[a-zA-Z]*\]$|^[a-z]+(-[a-z]+)*$
+    '**/_*/':
+      .dir: lowercase
+      .ts: camelCase
+      .tsx: camelCase | PascalCase
+      .scss: point.case
+      .svg: kebab-case
+      .png: kebab-case
+      .jpg: kebab-case
+      .jpeg: kebab-case
+      '*':
+        .dir: PascalCase | kebab-case
+        .ts: camelCase
+        .tsx: camelCase | PascalCase
+        .scss: point.case
+
+ignore:
+  - node_modules

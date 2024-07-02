@@ -28,7 +28,7 @@ export const Keyboard = (
       {KEYBOARD_INDEXES.map((indexes, index) => (
         <div className={style.row} key={index}>
           {KEYBOARD_LETTERS.slice(...indexes).map((letter) => {
-            const findedLetter = letters.find(
+            const findedLetter = letters.findLast(
               (item) => item.value === letter.toLowerCase()
             );
 
@@ -36,9 +36,11 @@ export const Keyboard = (
               <button
                 className={classNames(
                   style.item,
-                  { [style.itemCorrect]: findedLetter?.state === "CORRECT" },
+                  {
+                    [style.itemIncorrect]: findedLetter?.state === "INCORRECT"
+                  },
                   { [style.itemExist]: findedLetter?.state === "EXIST" },
-                  { [style.itemIncorrect]: findedLetter?.state === "INCORRECT" }
+                  { [style.itemCorrect]: findedLetter?.state === "CORRECT" }
                 )}
                 key={letter}
                 onClick={() => onKeyClick?.(letter.toLowerCase())}

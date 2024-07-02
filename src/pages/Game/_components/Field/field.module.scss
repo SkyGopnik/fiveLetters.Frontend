@@ -16,6 +16,12 @@
     height: 384px;
   }
 
+  @media screen and (max-height: 600px) {
+    height: 270px;
+
+    gap: 5px;
+  }
+
   &::-webkit-scrollbar {
     width: 0;
   }
@@ -24,6 +30,10 @@
 .row {
   display: flex;
   gap: 12px;
+
+  @media screen and (max-height: 600px) {
+    gap: 5px;
+  }
 }
 
 .item {
@@ -46,6 +56,11 @@
   @media screen and (min-width: 420px) and (min-height: 700px) {
     width: 54px;
     height: 54px;
+  }
+
+  @media screen and (max-height: 600px) {
+    width: 40px;
+    height: 40px;
   }
 
   &Entered {

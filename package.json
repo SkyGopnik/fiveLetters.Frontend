@@ -16,6 +16,7 @@
     "init:git": "git config core.autocrlf false && git config core.eol lf"
   },
   "dependencies": {
+    "@ls-lint/ls-lint": "^2.2.3",
     "@vkontakte/vk-bridge": "2.14.1",
     "axios": "1.6.7",
     "classnames": "2.5.1",

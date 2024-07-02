@@ -1,26 +1,26 @@
 .score {
+  width: 100%;
+
   position: absolute;
+  left: 0;
 
   display: flex;
-  align-items: flex-end;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
+
+  z-index: -1;
 
   color: var(--base-white);
 }
 
 .scoreType {
   &_game {
-    top: 20px;
-    right: 20px;
+    top: 15px;
   }
 
   &_info {
-    width: 100%;
-
     top: 40px;
-    left: 0;
-
-    align-items: center;
   }
 }
 

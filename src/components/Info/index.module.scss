@@ -10,7 +10,25 @@
   align-items: center;
   justify-content: center;
 
+  cursor: pointer;
+
   border-radius: 50%;
 
+  transition: opacity .3s ease;
+
   background-color: var(--base-white);
+
+  &:hover {
+    opacity: .7;
+  }
+}
+
+.infoColor {
+  &_red svg {
+    color: var(--red-700);
+  }
+
+  &_cyan svg {
+    color: var(--cyan-700);
+  }
 }

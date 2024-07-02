@@ -23,7 +23,6 @@ export const RatingPage = () => {
     try {
       const { data } = await axios.get("/game/rating");
       setRating(data);
-      console.log(data);
     } catch (e) {
       console.error(e);
     }

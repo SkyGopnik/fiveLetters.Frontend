@@ -13,7 +13,7 @@ import style from "./index.module.scss";
 export const GameExtraPage = () => {
   const [loading, setLoading] = useState(false);
 
-  const { game, setGame } = useGameStore();
+  const { game } = useGameStore();
   const navigate = useNavigate();
 
   const handleWatch = () => {
@@ -24,10 +24,9 @@ export const GameExtraPage = () => {
     setLoading(true);
 
     try {
-      await axios.delete("/game/close/" + game?.id);
-      setGame(undefined);
+      const { data } = await axios.delete("/game/close/" + game?.id);
 
-      navigate("/main");
+      navigate("/game/failed?word=" + data);
     } catch (e) {
       console.error(e);
     }

@@ -35,7 +35,9 @@ export const useActiveWord = () => {
         return;
       }
 
-      newActiveWord[lastLetterIndex] = KeyboardUtil.validateInput(key);
+      newActiveWord[lastLetterIndex] = KeyboardUtil.validateInput(
+        key.toLowerCase()
+      );
     }
 
     setActiveWord(newActiveWord);
