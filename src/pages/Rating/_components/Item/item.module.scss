@@ -13,6 +13,10 @@
   border-radius: 50%;
 }
 
+.info {
+  overflow: hidden;
+}
+
 .score {
   display: flex;
   align-items: center;
@@ -25,7 +29,7 @@
 }
 
 .position {
-  width: 28px;
+  min-width: 28px;
   height: 28px;
 
   margin-left: auto;

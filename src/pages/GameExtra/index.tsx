@@ -1,3 +1,4 @@
+import bridge, { EAdsFormats } from "@vkontakte/vk-bridge";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router";
@@ -16,11 +17,17 @@ export const GameExtraPage = () => {
   const { game } = useGameStore();
   const navigate = useNavigate();
 
-  const handleWatch = () => {
-    navigate(-1);
+  const handleWatch = async () => {
+    try {
+      await bridge.send("VKWebAppShowNativeAds", {
+        ad_format: EAdsFormats.REWARD
+      });
+    } catch (e) {
+      console.error(e);
+    }
   };
 
-  const handleEnd = async () => {
+  const handleEndGame = async () => {
     setLoading(true);
 
     try {
@@ -49,7 +56,7 @@ export const GameExtraPage = () => {
         <Button
           color="blue"
           disabled={loading}
-          onClick={handleEnd}
+          onClick={handleEndGame}
         >
           Завершить игру
         </Button>

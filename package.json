@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@ls-lint/ls-lint": "^2.2.3",
+    "@react-hooks-library/core": "^0.6.2",
     "@vkontakte/vk-bridge": "2.14.1",
     "axios": "1.6.7",
     "classnames": "2.5.1",

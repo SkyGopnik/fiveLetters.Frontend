@@ -7,11 +7,22 @@ import { Info } from "components";
 import { Button } from "components/Button";
 import { Close } from "components/Close";
 import { Container } from "components/Container";
+import { Score } from "components/Score";
 
-import { Field, Keyboard, Score } from "./_components";
-import { WordNotFoundModal } from "./_components/WordNotFoundModal";
+import {
+  NeedHelpModal,
+  WordNotFoundModal,
+  ConfirmCloseModal,
+  Field,
+  Keyboard
+} from "./_components";
 
-import { useActiveWord } from "./_hooks";
+import {
+  useActiveWord,
+  useConfirmCloseModal,
+  useNeedHelpModal,
+  useWordNotFoundModal
+} from "./_hooks";
 
 import style from "./index.module.scss";
 
@@ -26,8 +37,38 @@ export default function GamePage() {
     handleDeleteClick
   } = useActiveWord();
 
-  const [isNotFoundModalOpened, setIsNotFoundModalOpened] = useState(false);
   const [isLoading, setLoading] = useState(false);
+
+  const setPrompt = async (cb?: () => void) => {
+    const { data } = await axios.get("/game/prompt/" + game?.id);
+    setActiveWord(data.split(""));
+    cb?.();
+  };
+
+  const {
+    isNeedHelpModalOpened,
+    handleNeedHelpModalWatch,
+    handleNeedHelpModalClose
+  } = useNeedHelpModal({
+    activeWord,
+    onWatch: setPrompt
+  });
+
+  const {
+    isWordNotFoundModalOpened,
+    setWordNotFoundModalOpened,
+    handleWordNotFoundModalWatch,
+    handleWordNotFoundModalClose
+  } = useWordNotFoundModal({
+    onWatch: setPrompt
+  });
+
+  const {
+    isConfirmCloseModalOpened,
+    setConfirmCloseModalOpened,
+    handleConfirmModalEndGame,
+    handleConfirmCloseModalClose
+  } = useConfirmCloseModal();
 
   const { game, setGame } = useGameStore();
   const { words, setWords } = useWordsStore();
@@ -90,7 +131,7 @@ export default function GamePage() {
     } catch (e) {
       if (e instanceof AxiosError) {
         if (e.response!.status === 404) {
-          setIsNotFoundModalOpened(true);
+          setWordNotFoundModalOpened(true);
         }
       }
 
@@ -99,16 +140,6 @@ export default function GamePage() {
 
     setLoading(false);
     clearActiveWord();
-  };
-
-  const handleNotFoundWordWatch = async () => {
-    try {
-      const { data } = await axios.get("/game/prompt/" + game?.id);
-      setActiveWord(data.split(""));
-      setIsNotFoundModalOpened(false);
-    } catch (e) {
-      console.error(e);
-    }
   };
 
   const activeLetters = useMemo(
@@ -121,7 +152,7 @@ export default function GamePage() {
 
   return (
     <Container className={style.page}>
-      <Close onClick={() => navigate(-1)} />
+      <Close onClick={() => setConfirmCloseModalOpened(true)} />
       <Info
         color="cyan"
         onClick={() => navigate("/rules?isClose=true")}
@@ -145,9 +176,20 @@ export default function GamePage() {
         Проверить слово
       </Button>
       <WordNotFoundModal
-        isOpen={isNotFoundModalOpened}
-        onWatch={handleNotFoundWordWatch}
-        onClose={() => setIsNotFoundModalOpened(false)}
+        isOpen={isWordNotFoundModalOpened}
+        onWatch={handleWordNotFoundModalWatch}
+        onClose={handleWordNotFoundModalClose}
+      />
+      <NeedHelpModal
+        isOpen={isNeedHelpModalOpened}
+        onWatch={handleNeedHelpModalWatch}
+        onClose={handleNeedHelpModalClose}
+      />
+      <ConfirmCloseModal
+        isOpen={isConfirmCloseModalOpened}
+        onMainPage={() => navigate(-1)}
+        onEndGame={handleConfirmModalEndGame}
+        onClose={handleConfirmCloseModalClose}
       />
     </Container>
   );

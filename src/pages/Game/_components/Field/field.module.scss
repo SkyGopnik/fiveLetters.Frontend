@@ -67,6 +67,11 @@
     background: var(--neutral-800);
   }
 
+  &Placeholder {
+    color: var(--cyan-500);
+    background: var(--cyan-300);
+  }
+
   &Incorrect {
     color: var(--cyan-700);
     background: var(--cyan-600);

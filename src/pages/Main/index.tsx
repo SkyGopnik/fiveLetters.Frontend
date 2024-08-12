@@ -1,3 +1,4 @@
+import bridge, { BannerAdLocation } from "@vkontakte/vk-bridge";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router";
@@ -44,6 +45,16 @@ export default function MainPage() {
     }
 
     setIsGameLoading(false);
+  }, []);
+
+  useAsyncEffect(async () => {
+    try {
+      await bridge.send("VKWebAppShowBannerAd", {
+        banner_location: BannerAdLocation.BOTTOM
+      });
+    } catch (e) {
+      console.error(e);
+    }
   }, []);
 
   return (

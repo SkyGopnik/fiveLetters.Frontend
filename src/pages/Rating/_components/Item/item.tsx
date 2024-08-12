@@ -13,8 +13,8 @@ export const Item: FunctionComponent<ItemProps> = (
 ) => (
   <a className={style.item} {...rest}>
     <img className={style.avatar} src={avatar} alt={`Аватар ${name}`} />
-    <div>
-      <Text type="h4" tag="h3">{name}</Text>
+    <div className={style.info}>
+      <Text type="h4" tag="h3" hasEllipsis>{name}</Text>
       <Text className={style.score} type="b4">
         <span>{score}</span>
         <StarIcon className={style.icon} />

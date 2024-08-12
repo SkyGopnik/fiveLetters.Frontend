@@ -9,11 +9,11 @@ import { WordNotFoundModalProps } from "./types";
 
 import style from "./index.module.scss";
 
-export const WordNotFoundModal: FunctionComponent<WordNotFoundModalProps> = (
+export const NeedHelpModal: FunctionComponent<WordNotFoundModalProps> = (
   { isOpen, onWatch, onClose }
 ) => (
   <Modal
-    title="Слово не найдено в базе"
+    title="Нужна помощь?"
     description="Посмотри рекламу, чтобы получить
      рандомное слово или продолжи игру без помощи"
     actions={[

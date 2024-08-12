@@ -1,3 +1,5 @@
+import { WordStoreLetterState } from "store";
+
 export const KEYBOARD_INDEXES = [
   [0, 12],
   [12, 23],
@@ -38,3 +40,11 @@ export const KEYBOARD_LETTERS = [
   "Б",
   "Ю"
 ];
+
+export const STATE_ORDER: Record<WordStoreLetterState, number> = {
+  INCORRECT: 1,
+  EXIST: 2,
+  CORRECT: 3,
+  PLACEHOLDER: 4,
+  DEFAULT: 5
+};

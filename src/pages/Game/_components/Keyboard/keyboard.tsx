@@ -1,8 +1,9 @@
 import classNames from "classnames";
+import { useMemo } from "react";
 
 import RemoveIcon from "./_assets/remove.svg";
 
-import { KEYBOARD_INDEXES, KEYBOARD_LETTERS } from "./constants";
+import { KEYBOARD_INDEXES, KEYBOARD_LETTERS, STATE_ORDER } from "./constants";
 
 import { KeyboardProps } from "./types";
 
@@ -17,6 +18,11 @@ export const Keyboard = (
     ...props
   }: KeyboardProps
 ) => {
+  const sortedLettersByPriority = useMemo(
+    () => letters.sort((a, b) => STATE_ORDER[a.state] - STATE_ORDER[b.state]),
+    [letters]
+  );
+
   return (
     <div
       {...props}
@@ -28,7 +34,7 @@ export const Keyboard = (
       {KEYBOARD_INDEXES.map((indexes, index) => (
         <div className={style.row} key={index}>
           {KEYBOARD_LETTERS.slice(...indexes).map((letter) => {
-            const findedLetter = letters.findLast(
+            const findedLetter = sortedLettersByPriority.findLast(
               (item) => item.value === letter.toLowerCase()
             );
 
@@ -37,10 +43,10 @@ export const Keyboard = (
                 className={classNames(
                   style.item,
                   {
-                    [style.itemIncorrect]: findedLetter?.state === "INCORRECT"
-                  },
-                  { [style.itemExist]: findedLetter?.state === "EXIST" },
-                  { [style.itemCorrect]: findedLetter?.state === "CORRECT" }
+                    [style.itemIncorrect]: findedLetter?.state === "INCORRECT",
+                    [style.itemExist]: findedLetter?.state === "EXIST",
+                    [style.itemCorrect]: findedLetter?.state === "CORRECT"
+                  }
                 )}
                 key={letter}
                 onClick={() => onKeyClick?.(letter.toLowerCase())}

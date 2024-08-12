@@ -1,0 +1,67 @@
+.wrapper {
+  width: 100%;
+  height: 100%;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  transition: visibility .3s ease;
+
+  visibility: hidden;
+}
+
+.backdrop {
+  width: 100%;
+  height: 100%;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  transition: opacity .3s ease;
+
+  opacity: 0;
+
+  background-color: rgba(#000000, .7);
+}
+
+.modal {
+  width: calc(100% - 11px * 2);
+
+  padding: 20px;
+
+  position: absolute;
+  bottom: -100%;
+
+  border-radius: 20px;
+
+  transition: bottom .3s ease;
+
+  color: var(--base-white);
+  background-color: var(--cyan-500);
+}
+
+.description {
+  margin-top: 8px;
+}
+
+.actions {
+  margin-top: 25px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.wrapperOpened {
+  visibility: visible;
+
+  .backdrop {
+    opacity: 1;
+  }
+
+  .modal {
+    bottom: 20px;
+  }
+}

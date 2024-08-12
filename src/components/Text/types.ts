@@ -14,5 +14,6 @@ export type TextType =
 
 export type TextProps = {
   type: TextType,
-  tag?: string
+  tag?: string,
+  hasEllipsis?: boolean
 } & DivProps;

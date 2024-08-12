@@ -25,8 +25,23 @@ export const Field = ({ className, words, ...props }: FieldProps) => {
       emptyRows = 0;
     }
 
+    const activeWord = words[words.length - 1];
+    const restWords = words.slice(0, words.length - 1);
+
+    activeWord.forEach((item, activeIndex) => {
+      restWords.forEach((row) => {
+        const { state, value } = row[activeIndex];
+
+        if (!item.value && state === "CORRECT") {
+          item.state = "PLACEHOLDER";
+          item.value = value;
+        }
+      });
+    });
+
     return [
-      ...words,
+      ...restWords,
+      [...activeWord],
       ...[...Array(emptyRows)].map(() => (
         [...Array(5)].map(() => ({
           state: "DEFAULT",
@@ -52,6 +67,7 @@ export const Field = ({ className, words, ...props }: FieldProps) => {
               className={classNames(
                 style.item,
                 { [style.itemEntered]: letter.value },
+                { [style.itemPlaceholder]: letter.state === "PLACEHOLDER" },
                 { [style.itemCorrect]: letter.state === "CORRECT" },
                 { [style.itemExist]: letter.state === "EXIST" },
                 { [style.itemIncorrect]: letter.state === "INCORRECT" }

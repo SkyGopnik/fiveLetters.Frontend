@@ -1,5 +1,6 @@
 export type WordStoreLetterState =
   "DEFAULT"
+  | "PLACEHOLDER"
   | "CORRECT"
   | "EXIST"
   | "INCORRECT";
