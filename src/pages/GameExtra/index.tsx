@@ -25,6 +25,8 @@ export const GameExtraPage = () => {
     } catch (e) {
       console.error(e);
     }
+
+    navigate(-1);
   };
 
   const handleEndGame = async () => {
